@@ -1,0 +1,19 @@
+---
+- name: Install MVG Scraper
+  hosts: mvg.auch.cool
+  remote_user: root
+  vars_files:
+    - vault.yaml
+
+  tasks:
+  - name: install service
+    copy:
+      src: "../scraper/mvg-scraper.service"
+      dest: /etc/systemd/system/
+  
+  - name: start service
+    systemd:
+      state: started
+      enabled: true
+      name: mvg-scraper.service
+      daemon_reload: true
