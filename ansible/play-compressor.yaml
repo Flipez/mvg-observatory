@@ -1,0 +1,30 @@
+---
+- name: Install MVG Compressor
+  hosts: mvg.auch.cool
+  remote_user: root
+  vars_files:
+    - vault.yaml
+
+  tasks:
+  - name: copy compressor
+    template:
+      src: "{{ item }}"
+      dest: /srv/compressor/
+      mode: a+x
+    with_fileglob:
+      - "../compressor/*.sh.j2"
+
+  - name: install service and timer
+    copy:
+      src: "{{ item }}"
+      dest: /etc/systemd/system/
+    loop:
+      - "../compressor/mvg-compressor.service"
+      - "../compressor/mvg-compressor.timer"
+  
+  - name: start timer
+    systemd:
+      state: started
+      enabled: true
+      name: mvg-compressor.timer
+      daemon_reload: true

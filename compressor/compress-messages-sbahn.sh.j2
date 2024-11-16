@@ -1,0 +1,25 @@
+#!/bin/bash
+set -o errexit
+
+beforeyesterday=$(date -d '-2 day' "+%Y%m%d")
+yesterday=$(date -d '-1 day' "+%Y%m%d")
+
+###
+# Created tar from the requests yesterday using zstandard compression
+tar --sort=name --zstd -cf messages/sbahn/$yesterday.tar.zst messages/sbahn/$yesterday/
+
+###
+# Test tar integrity by listing its content
+tar -tf messages/sbahn/$yesterday.tar.zst > /dev/null
+
+###
+# Copy compressed file into storagebox for public access
+rsync -av messages/sbahn/$yesterday.tar.zst /mnt/storagebox/messages/sbahn/
+
+###
+# Remove the day before yesterday
+rm -r messages/sbahn/$beforeyesterday/
+
+###
+# Perform healthcheckping if all previous commands succeed
+curl "{{ compressor.messages.hc_sbahn }}"

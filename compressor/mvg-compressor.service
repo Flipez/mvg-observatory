@@ -1,0 +1,12 @@
+[Unit]
+Description=MVG Data compressor
+
+[Service]
+WorkingDirectory=/srv/mvg-scraper/data
+Type=oneshot
+ExecStart=/srv/mvg-observatory/compressor/compress.sh
+ExecStart=/srv/mvg-observatory/compressor/compress-messages-mvg.sh
+ExecStart=/srv/mvg-pbservatory/compressor/compress-messages-sbahn.sh
+
+[Install]
+WantedBy=multi-user.target
