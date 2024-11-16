@@ -1,6 +1,4 @@
-INSERT INTO mvg.responses (plannedDepartureTime, realtime, delayInMinutes, realtimeDepartureTime, transportType, label, divaId, network, trainType, destination, cancelled, sev,
- stopPositionNumber, messages, bannerHash, occupancy, stopPointGlobalId, platform, platformChanged, station, timestamp, datestring)
-SETTINGS input_format_allow_errors_ratio = 1
+INSERT INTO bahn.responses (plannedDepartureTime, realtime, delayInMinutes, realtimeDepartureTime, transportType, label, divaId, network, trainType, destination, cancelled, sev, stopPositionNumber, messages, bannerHash, occupancy, stopPointGlobalId, platform, platformChanged, station, timestamp, datestring)
 SELECT
     intDiv(plannedDepartureTime, 1000),
     realtime,
@@ -24,5 +22,5 @@ SELECT
     splitByChar('/', _file)[2],
     splitByChar('_', splitByChar('/', _file)[3])[1],
     splitByChar('/', _file)[1]
-FROM file('*.tar.zst :: **/*/*_body.json', 'JSONEachRow')
+FROM file('test/data.mvg.auch.cool/sbahn-data/*.tar.zst :: */de*/*_body.json', 'JSONEachRow')
 SETTINGS input_format_allow_errors_ratio = 1
