@@ -1,6 +1,6 @@
 ---
 - name: Install MVG Scraper
-  hosts: mvg.auch.cool
+  hosts: data.mvg.auch.cool
   remote_user: root
   vars_files:
     - vault.yaml
