@@ -8,11 +8,16 @@
   tasks:
   - name: copy compressor
     template:
-      src: "{{ item }}"
-      dest: /srv/compressor/
+      src: "../compressor/{{ item.src }}"
+      dest: /srv/compressor/{{ item.dest }}
       mode: a+x
-    with_fileglob:
-      - "../compressor/*.sh.j2"
+    with_items:
+      - src: "compress.sh.j2"
+        dest: "compress.sh"
+      - src: "compress-messages-mvg.sh.j2"
+        dest: "compress-messages-mvg.sh"
+      - src: "compress-messages-sbahn.sh.j2"
+        dest: "compress-messages-sbahn.sh"
 
   - name: install service and timer
     copy:
