@@ -1,0 +1,34 @@
+clickhouse-benchmark --query "select * from mvg_erp.responses_0 where label = 'U2' or label = 'U4'" --password='' --delay 0 --iterations 10
+Loaded 1 queries.
+
+Queries executed: 10.
+
+localhost:9000, queries: 10, QPS: 0.073, RPS: 74312466.103, MiB/s: 2170.628, result RPS: 12606965.768, result MiB/s: 872.982.
+
+0.000%          13.631 sec.
+10.000%         13.638 sec.
+20.000%         13.640 sec.
+30.000%         13.655 sec.
+40.000%         13.658 sec.
+50.000%         13.669 sec.
+60.000%         13.669 sec.
+70.000%         13.687 sec.
+80.000%         13.704 sec.
+90.000%         13.713 sec.
+95.000%         13.717 sec.
+99.000%         13.717 sec.
+99.900%         13.717 sec.
+99.990%         13.717 sec.
+
+
+
+
+
+INSERT
+
+Query id: 4daa2830-3909-4aa8-992d-21af4c7f9c95
+
+Ok.
+
+0 rows in set. Elapsed: 3267.667 sec. Processed 1.02 billion rows, 378.64 GB (311.18 thousand rows/s., 115.88 MB/s.)
+Peak memory usage: 4.27 GiB.
