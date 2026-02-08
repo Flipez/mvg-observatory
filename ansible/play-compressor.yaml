@@ -18,6 +18,8 @@
         dest: "compress-messages-mvg.sh"
       - src: "compress-messages-sbahn.sh.j2"
         dest: "compress-messages-sbahn.sh"
+      - src: "compress-sbahn.sh.j2"
+        dest: "compress-sbahn.sh"
 
   - name: install service and timer
     copy:
@@ -26,10 +28,15 @@
     loop:
       - "../compressor/mvg-compressor.service"
       - "../compressor/mvg-compressor.timer"
-  
+      - "../compressor/sbahn-compressor.service"
+      - "../compressor/sbahn-compressor.timer"
+
   - name: start timer
     systemd:
       state: started
       enabled: true
-      name: mvg-compressor.timer
+      name: "{{ item }}"
       daemon_reload: true
+    loop:
+      - mvg-compressor.timer
+      - sbahn-compressor.timer

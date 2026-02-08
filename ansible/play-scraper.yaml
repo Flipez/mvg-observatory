@@ -6,14 +6,20 @@
     - vault.yaml
 
   tasks:
-  - name: install service
+  - name: install services
     copy:
-      src: "../scraper/mvg-scraper.service"
+      src: "{{ item }}"
       dest: /etc/systemd/system/
-  
-  - name: start service
+    loop:
+      - "../scraper/mvg-scraper.service"
+      - "../scraper/sbahn-scraper.service"
+
+  - name: start services
     systemd:
       state: started
       enabled: true
-      name: mvg-scraper.service
+      name: "{{ item }}"
       daemon_reload: true
+    loop:
+      - mvg-scraper.service
+      - sbahn-scraper.service

@@ -1,0 +1,10 @@
+[Unit]
+Description=S-Bahn Data Compressor
+
+[Service]
+WorkingDirectory=/srv/sbahn-scraper/data
+Type=oneshot
+ExecStart=/srv/compressor/compress-sbahn.sh
+
+[Install]
+WantedBy=multi-user.target
