@@ -1,0 +1,19 @@
+[Unit]
+Description=S-Bahn Munich WebSocket Scraper
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/srv/sbahn-scraper
+ExecStart=/srv/sbahn-scraper/scraper
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=sbahn-scraper
+
+[Install]
+WantedBy=multi-user.target

@@ -4,7 +4,10 @@ Description=MVG Subway Scraper
 [Service]
 WorkingDirectory=/srv/mvg-scraper
 Environment=MVG_STATION_RANGE=-1
-Environment=MVG_USER_AGENT=rmuller/thesis
+#Environment=MVG_USER_AGENT=rmuller/thesis
+Environment=MVG_INTERVAL=360
+Environment=MVG_CONCURRENCY=1
+Environment=MVG_USER_AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0"
 Type=simple
 ExecStart=puma
 Restart=always
